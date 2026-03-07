@@ -2,6 +2,9 @@ name: Build APK from ZIP
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/build-apk.yml"
 
 jobs:
   build:
@@ -20,14 +23,17 @@ jobs:
       - name: ZIP dosyasını aç
         run: unzip PyLearnAndroid.zip
 
+      - name: Çıkan dosyaları listele
+        run: ls -R
+
       - name: gradlew izin ver
-        run: chmod +x gradlew
+        run: chmod +x PyLearnAndroid/gradlew
 
       - name: Debug APK üret
-        run: ./gradlew assembleDebug
+        run: cd PyLearnAndroid && ./gradlew assembleDebug
 
       - name: APK yükle
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: app/build/outputs/apk/debug/*.apk
+          path: PyLearnAndroid/app/build/outputs/apk/debug/*.apk
