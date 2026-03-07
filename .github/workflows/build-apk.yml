@@ -18,8 +18,7 @@ jobs:
           java-version: '17'
 
       - name: ZIP dosyasını aç
-        run: unzip PyLearnAndroid.zip
-
+        run: unzip PyLearnAndroid_GitHubReady.zip
       - name: gradlew izin ver
         run: chmod +x gradlew
 
